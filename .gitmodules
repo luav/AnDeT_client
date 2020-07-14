@@ -1,0 +1,9 @@
+[submodule "leto"]
+	path = leto
+	url = https://github.com/formicidae-tracker/leto.git
+[submodule "studio"]
+	path = studio
+	url = https://github.com/formicidae-tracker/studio.git
+[submodule "tag-layouter"]
+	path = tag-layouter
+	url = https://github.com/formicidae-tracker/tag-layouter.git
