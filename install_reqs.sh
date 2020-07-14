@@ -7,7 +7,7 @@
 # \author Artem Lutov <lutov.analytics@gmail.com>
 
 # Target OS: Linux
-# Actual build OS: Linux Ubuntu 18.04+
+# Actual build OS: Linux Debian 9 + / Ubuntu 18.04+
 
 # Update and init all submodules
 git submodule update --init --recursive

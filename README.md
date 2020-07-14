@@ -33,7 +33,7 @@ $ ./build.sh [<component>]
 
 Details:
 ```
-$ ./build.sh -h | [-i,--init] [<component>=ALL]
+$ ./build.sh [-h,--help] | [-i,--init] [<component>=ALL]
   -h,--help  - help, show this usage description
   -i,--init  - initialize the build environment, which should be done only when building the project for the first time
   <component>  - {leto-cli, tag-layouter, studio, ALL}

@@ -6,7 +6,7 @@
 #
 # \author Artem Lutov <lutov.analytics@gmail.com>
 
-USAGE="$0 -h | [-i,--init] [<component>=ALL]
+USAGE="$0 [-h,--help] | [-i,--init] [<component>=ALL]
   -h,--help  - help, show this usage description
   -i,--init  - initialize the build environment, which should be done only when building the project for the first time
   <component>  - {leto-cli, tag-layouter, studio, ALL}
@@ -22,17 +22,13 @@ while [ $1 ]; do
 	case $1 in
 	-h|--help)
 		# Use defaults for the remained parameters
-		#echo -e $USAGE # -e to interpret '\n\
-        printf "$USAGE"
+		#echo -e $USAGE # -e to interpret '\n"
+		printf "$USAGE"
 		exit 0
 		;;
 	-i|--init)
-		if [ "${2::1}" == "-" ]; then
-			echo "ERROR, invalid argument value of $1: $2"
-			exit 1
-		fi
 		INIT=1
-		echo "Build environment initialzation is activated"
+		echo "Build environment installation is activated"
 		shift
 		;;
 	*)
@@ -65,7 +61,7 @@ git submodule update --recursive
 
 NBUILDS=0  # The number of all builds
 
-# Client for tracking configuration and live tracking video
+# Build client for tracking configuration and live tracking video
 ERR_LETO=0
 PROJ='leto-cli'
 if [ $TARG == 'ALL' -o $TARG == $PROJ ]; then
@@ -78,7 +74,7 @@ if [ $TARG == 'ALL' -o $TARG == $PROJ ]; then
     ((++NBUILDS))
 fi
 
-# Tag families drawing app
+# Build  tag families drawing app
 PROJ='tag-layouter'
 ERR_TAG=0
 if [ $TARG == 'ALL' -o $TARG == $PROJ ]; then
@@ -92,7 +88,7 @@ if [ $TARG == 'ALL' -o $TARG == $PROJ ]; then
     ((++NBUILDS))
 fi
 
-# FORT Studio and Myrmidon API to analyze tracking data
+# Build FORT Studio and Myrmidon API to analyze tracking data
 PROJ='studio'
 ERR_STUD=0
 if [ $TARG == 'ALL' -o $TARG == $PROJ ]; then
@@ -109,7 +105,7 @@ fi
 
 # Report the build execution status
 if [ $ERR_LETO -ne 0 -o $ERR_TAG -ne 0 -o $ERR_STUD -ne 0 ]; then
-	echo "ERROR, some builds were failed, errorcodes:
+	echo "ERROR, some builds were failed, error codes:
   leto-cli: $ERR_LETO
   tag-layouter: $ERR_TAG
   studio: $ERR_STUD
@@ -122,4 +118,4 @@ if [ $NBUILDS -eq 0 ]; then
     exit 1
 fi
 
-echo "Successfully completed boulds: $NBUILDS"
+echo "Successfully completed builds: $NBUILDS"
