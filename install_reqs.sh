@@ -9,6 +9,9 @@
 # Target OS: Linux
 # Actual build OS: Linux Ubuntu 18.04+
 
+# Update and init all submodules
+git submodule update --init --recursive
+
 # Common development packages required to build executables
 echo "Installing common build environment ..."
 ERR=`make --version`

@@ -10,6 +10,8 @@
 # components: leto-cli, tag-layouter, studio
 
 ./install_reqs.sh
+# Update all submodules
+git submodule update --recursive
 
 #go get -u github.com/formicidae-tracker/leto/leto-cli
 # Client for tracking configuration and live tracking video
