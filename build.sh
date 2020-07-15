@@ -68,7 +68,9 @@ if [ $TARG == 'ALL' -o $TARG == $PROJ ]; then
     echo "Building $PROJ ..."
     #go get -u github.com/formicidae-tracker/leto/leto-cli
     cd leto/$PROJ && \
-    go build -i . && \
+    go build . && \
+    # To build and put the binary into golang home:
+    #go install .
     cd ../..
     ERR_LETO=$?
     ((++NBUILDS))
@@ -82,8 +84,6 @@ if [ $TARG == 'ALL' -o $TARG == $PROJ ]; then
     cd $PROJ && \
     git submodule update --init && \
     make
-    # TODO: fix an error
-    #make
     ERR_TAG=$?
     ((++NBUILDS))
 fi

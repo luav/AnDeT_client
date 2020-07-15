@@ -6,4 +6,4 @@
 	url = https://github.com/formicidae-tracker/studio.git
 [submodule "tag-layouter"]
 	path = tag-layouter
-	url = https://github.com/formicidae-tracker/tag-layouter.git
+	url = https://github.com/luav/tag-layouter.git
