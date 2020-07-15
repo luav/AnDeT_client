@@ -14,17 +14,23 @@ git submodule update --init --recursive
 
 # Common development packages required to build executables
 echo "Installing common build environment ..."
-ERR=`make --version`
+echo "-- make --"
+make --version
+ERR=$?
 if [ $ERR -ne 0 ]; then
 	sudo apt-get install -y build-essential	make g++ cmake bc
 fi
 
-ERR=`g++ --version`
+echo "-- g++ --"
+g++ --version
+ERR=$?
 if [ $ERR -ne 0 ]; then
 	sudo apt-get install -y g++
 fi
 
-ERR=`cmake --version`
+echo "-- cmake --"
+cmake --version
+ERR=$?
 if [ $ERR -ne 0 ]; then
 	sudo apt-get install -y cmake bc
 fi
@@ -44,15 +50,50 @@ if [ $RES -eq 0 ]; then
 fi
 
 # Component-specific requirements
-echo "Installing build environment for FORT:leto (live tracking video and tracking configuration) ..."
-sudo apt-get install -y golang
+# leto (live tracking video and tracking configuration)
+whereis go | grep go > /dev/null
+ERR=$?
+if [ $ERR -ne 0 ]; then
+	echo "Installing build environment for leto (live tracking video and tracking configuration) ..."
+	sudo apt-get install -y golang
+fi
 
-echo "Installing build environment for FORT:tag-layouter (tags drawing) ..."
-sudo apt-get install -y golang libopencv-dev
+#tag-layouter (tags drawing)
+whereis go | grep go > /dev/null
+ERR=$?
+if [ $ERR -eq 0 ]; then
+	# Note: opencv is not detectable via `whereis``
+	dpkg -l | grep libopencv > /dev/null
+	ERR=$?
+fi
+if [ $ERR -ne 0 ]; then
+	echo "Installing build environment for tag-layouter (tags drawing) ..."
+	sudo apt-get install -y golang libopencv-dev
+fi
 
-echo "Installing build environment for FORT:studio (tracking data analysis) ..."
-sudo apt-get install -y libopencv-dev libeigen3-dev libprotobuf-dev libasio-dev qt5-default
-
+# studio (tracking data analysis)
+dpkg -l | grep libopencv > /dev/null
+ERR=$?
+if [ $ERR -eq 0 ]; then
+	whereis eigen3 | grep eigen3 > /dev/null
+	ERR=$?
+fi
+if [ $ERR -eq 0 ]; then
+	whereis libprotobuf | grep libprotobuf > /dev/null
+	ERR=$?
+fi
+if [ $ERR -eq 0 ]; then
+	whereis asio | grep asio > /dev/null
+	ERR=$?
+fi
+if [ $ERR -eq 0 ]; then
+	whereis qt5 | grep qt5 > /dev/null
+	ERR=$?
+fi
+if [ $ERR -ne 0 ]; then
+	echo "Installing build environment for studio (tracking data analysis) ..."
+	sudo apt-get install -y libopencv-dev libeigen3-dev libprotobuf-dev libasio-dev qt5-default
+fi
 
 ## TODO: Euresys driver install
 #echo "Installing the build environment for FORT:artemis (FORmicidae Tracker) ..."
@@ -60,17 +101,10 @@ sudo apt-get install -y libopencv-dev libeigen3-dev libprotobuf-dev libasio-dev 
 ## NOTE: requires installation of Euresys grabber drivers
 #sudo apt-get install -y ... 
 
-echo "Installing build environment for FORT:olympus (web UI) ..."
-sudo apt install -y npm
-#sudo npm install -g @angular/cli typescript
 
-
-# libopencv-dev
-#Protobuf 3.3.0, Asio, Typescript
-#protobuf
-#	libprotobuf-dev
-
-ERR=$?
+if [ $ERR -eq 0 ]; then
+	ERR=$?
+fi
 if [ $ERR -ne 0 ]; then
 	echo "ERROR, installation of the build environment is failed, error code: $ERR"
 	exit $ERR
