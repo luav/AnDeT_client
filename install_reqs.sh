@@ -92,12 +92,12 @@ if [ $ERR -eq 0 ]; then
 fi
 if [ $ERR -ne 0 ]; then
 	echo "Installing build environment for studio (tracking data analysis) ..."
-	sudo apt-get install -y libopencv-dev libeigen3-dev libprotobuf-dev libasio-dev qt5-default
+	sudo apt-get install -y libopencv-dev libeigen3-dev libprotobuf-dev protobuf-compiler libasio-dev qt5-default
 fi
 
 ## TODO: Euresys driver install
 #echo "Installing the build environment for FORT:artemis (FORmicidae Tracker) ..."
-## Note: requires some FORT:hermes dependences: libprotobuf-dev libasio-dev
+## Note: requires some FORT:hermes dependences: libprotobuf-dev protobuf-compiler libasio-dev
 ## NOTE: requires installation of Euresys grabber drivers
 #sudo apt-get install -y ... 
 
