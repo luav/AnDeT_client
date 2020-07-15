@@ -2,6 +2,7 @@
 This is a collection of client applications for AnDeT (Ant Development Tracker) at the Department of Biology of the UNIFR.  
 AnDeT is an extension of [FORT (Formicidae Tracker)](https://github.com/formicidae-tracker) of the UNIL.
 
+License: APL v2 for the new components, an original license of the subprojects for their extensions  
 Website: https://www3.unifr.ch/bio/en/groups/leboeuf-group/  
 Author of the extensions: Artem Lutov <lutov.analytics@gmail.com>
 
